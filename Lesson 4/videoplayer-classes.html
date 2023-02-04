@@ -47,14 +47,22 @@
 <script>
 //Need to use classes instead of what was used before.
     const saveBtn = document.querySelector('.save')
+    const captions = []
+
+    const captionInput = document.querySelector('.captionInput')
+    const startTime = document.querySelector('.startTime')
+    const endTime = document.querySelector('.endTime')
 
     const render = () => {
-
+        const newCap = new Caption(captionInput.value, startTime.value, endTime.value)
+        console.log(newCap.start)
     }
 
     function Caption (captionText, start, end) {
-
+        this.start = start
     }
+
+    saveBtn.addEventListener('click', render)
 </script>
 <style>
     .videoContainer {
