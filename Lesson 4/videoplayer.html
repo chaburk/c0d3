@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caption maker for video player</title>
+</head>
+<body>
+    <div class="video-container">
+        <video 
+        src="https://songz.c0d3.com/js4/exercises/pubDomainRemix.mp4"
+        class="videoElement"
+        controls></video>
+        <div class="video-caption"></div>
+    </div>
+    <div class="input-container">
+        <h3>Add caption</h3>
+        <input type="text" class="captionInput" placeholder="Caption">
+        <input type="text" class="startInput" placeholder="Start (ms)">
+        <input type="text" class="endInput" placeholder="End (ms)">
+        <button class="saveButton">Save</button>
+        <hr>
+        <div class="captionList">
+        </div>
+    </div>
+</body>
+<script>
+    const captionElement = document.querySelector('.captionInput')
+    const startTime = document.querySelector('.startInput')
+    const endTime = document.querySelector('.endInput')
+    const display = document.querySelector('.captionList')
+    const saveBtn = document.querySelector('.saveButton')
+    const videoCaption = document.querySelector('.video-caption')
+    const video = document.querySelector('.videoElement')
+
+    const capObjArr = []
+
+    const createCaption = () => {
+        if (Number.isInteger(+startTime.value) && Number.isInteger(+endTime.value)){
+            const div = document.createElement('div')
+            div.classList = "caption"
+            div.innerHTML = `<h5>${captionElement.value}</h5><p class="control startAt">${startTime.value}</p><p class="control startEnd">${endTime.value}</p>`
+            display.append(div)
+            const capObj = {
+                caption: captionElement.value,
+                start: +startTime.value,
+                end: +endTime.value
+            }
+            capObjArr.push(capObj)
+            captionElement.value = ""
+            startTime.value = ""
+            endTime.value = ""
+            const allCaps = document.querySelectorAll('.caption')
+            allCaps.forEach(e => { 
+                e.addEventListener('click', () => {
+                    if (confirm('Do you want to delete')){
+                        e.innerHTML = ""
+                    }
+        
+                })
+            })
+            console.log(capObjArr)
+        }
+        
+    }
+
+    const addCaption = () => {
+        capObjArr.forEach(e => {
+            console.log(e.start < video.currentTime)
+                if(e.start > (video.currentTime * 1000) && e.end < (video.currentTime *1000)){
+                    videoCaption.innerText = e.caption;
+                    console.log('sim')
+                }
+            })
+        }
+
+    setTimeout(() => {
+        video.addEventListener('timeupdate', () => {
+            addCaption()
+    }, 1000)})
+
+    saveBtn.addEventListener('click', createCaption)
+
+</script>
+<style>
+    .video-container {
+        width: 100%;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        background: rgba(20, 40, 50, 1);
+        text-align: center;
+    }
+    .video-caption {
+        position: absolute;
+        top: 10px;
+        background: rgba(20, 40, 50, .3);
+        font-size: 30px;
+        padding: 5px;
+        width: 100%;
+    }
+    .videoElement {
+        height: 400px;
+    }
+    .input-container {
+        width: 600px;
+        margin: 430px auto 20px auto;
+    }
+    .captionInput {
+        width: 300px;
+    }
+
+    .caption {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .caption h5{
+        width: 100%;
+    }
+
+    .control {
+        width: 100px;
+    }
+
+</style>
+<!--My attempt-->
+<!-- <body>
+    <div class="container">
+        <div class="video-container">
+            <video 
+                class="videoElement" 
+                src="https://songz.c0d3.com/js4/exercises/pubDomainRemix.mp4"
+                controls
+                style= "width:700px;">
+            </video>
+        </div>
+        <div class="caption-container">
+            <div class="add-caption">
+                <h3>Add Caption</h3>
+                <input type="text" class="caption" placeholder="Caption">
+                <input type="text" class="start" placeholder="Start (ms)">
+                <input type="text" class="end" placeholder="End (ms)">
+                <button class="save">Save</button>
+                <hr>
+            </div>
+            <div class="captions-display">
+                <div class="caption">
+                    <h5>practice caption</h5>
+                    <div class="start-stop">
+                        0
+                        3000
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+
+    .container {
+        display: block;
+    }
+
+    .video-container {
+        text-align: center;
+        background-color: darkslategrey;
+    }
+
+    .caption-container {
+        display: inline-block;
+        margin: auto;
+        background-color: red;
+        width: 50%;
+    }
+
+    .add-caption {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+
+    }
+
+    [type="text"] {
+        margin-right: 2px;
+    }
+
+    .save {
+        width: 40px;
+    }
+    .caption {
+        width: 50%;
+    }
+
+    .caption {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    h3 {
+        width: 100%;
+        margin-top: 25px;
+        margin-bottom: 20px;
+    }
+</style> -->
+</html>

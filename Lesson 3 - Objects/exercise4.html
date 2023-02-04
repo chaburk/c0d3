@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 4</title>
+</head>
+<body>
+    <h1>Friends List</h1>
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="" class="name-input">
+    <label for="age">Age:</label>
+    <input type="text" name="age" id="" class="age-input">
+    <button class="add">Add</button>
+    <div class="friends-list"></div>
+</body>
+<script>
+    const nameInput = document.querySelector('.name-input')
+    const ageInput = document.querySelector('.age-input')
+    const addBtn = document.querySelector('.add')
+    const friendsDisplay = document.querySelector('.friends-list')
+    const lsDataNames = localStorage.getItem('friendNames') || "[]"
+    const lsDataAges = localStorage.getItem('friendAges') || "[]"
+    const names = JSON.parse(lsDataNames)
+    const ages = JSON.parse(lsDataAges)
+
+    const render = () => {
+        localStorage.setItem('friendNames', JSON.stringify(names))
+        localStorage.setItem('friendAges', JSON.stringify(ages))
+        friendsDisplay.innerHTML = names.reduce((acc, e, i) => {
+            return acc + `<h2 class="friendName">${e}</h2>`
+        }, "")
+        const allNames = document.querySelectorAll('.friendName')
+        allNames.forEach((e, i) => {
+            e.onclick = () => {
+                alert(`${ages[i]}`)
+            }
+        })
+    }
+
+    addBtn.onclick = () => {
+        nameValue = nameInput.value
+        ageValue = ageInput.value
+        names.unshift(nameValue)
+        ages.unshift(ageValue)
+        render()
+    }
+    render()
+
+</script>
+</html>
+<!--Exercise 4 OG-->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 4</title>
+</head>
+<body>
+    <h1>Friends List</h1>
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="" class="name-input">
+    <label for="age">Age:</label>
+    <input type="text" name="age" id="" class="age-input">
+    <button class="add">Add</button>
+    <div class="friends-list"></div>
+</body>
+<script>
+    const nameInput = document.querySelector('.name-input')
+    const ageInput = document.querySelector('.age-input')
+    const addBtn = document.querySelector('.add')
+    const friendsDisplay = document.querySelector('.friends-list')
+    const names = []
+    const ages = []
+
+    const render = () => {
+        friendsDisplay.innerHTML = names.reduce((acc, e, i) => {
+            return acc + `<h2 class="friendName">${e}</h2><h3 class="friendAge">${ages[i]}</h3>`
+        }, "")
+    }
+
+    addBtn.onclick = () => {
+        nameValue = nameInput.value
+        ageValue = ageInput.value
+        names.unshift(nameValue)
+        ages.unshift(ageValue)
+        render()
+    }
+
+</script>
+</html> -->

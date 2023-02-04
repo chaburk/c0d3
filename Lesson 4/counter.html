@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+</head>
+<body>
+    <div class="display">0</div>
+    <div class="companyDisplay"></div>
+    <hr>
+    <input type="text" class="company">
+    <button class="counter">Another!</button>
+</body>
+</html>
+<script>
+    const display = document.querySelector('.display')
+    const countBtn = document.querySelector('.counter')
+    const companyName = document.querySelector('.company')
+    const companyDisplay = document.querySelector('.companyDisplay')
+
+    const lsData = localStorage.getItem("rn") || '[]'
+    const companies = JSON.parse(lsData)
+
+    let total = 0
+
+    const loadLocal = () => {
+        total = companies.length
+        display.innerHTML = `<h1>${total}</h1>`
+        companyDisplay.innerHTML = companies.reduce((acc, e) => {
+            return acc + `<h2>${e}</h2>`
+        }, "")
+    }
+
+    const addOne = () => {
+        total += 1;
+        companies.push(companyName.value)
+        companyDisplay.innerHTML = companies.reduce((acc, e) => {
+            return acc + `<h2>${e}</h2>`
+        }, "")
+        companyName.value = ""
+        display.innerHTML = `<h1>${total}</h1>`
+        localStorage.setItem("rn",JSON.stringify(companies))
+    }
+
+    loadLocal()
+    countBtn.addEventListener('click', addOne)
+</script>

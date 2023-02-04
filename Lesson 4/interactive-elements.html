@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice</title>
+</head>
+<!--Text hiding tool-->
+<body>
+    <input type="text" name="" id="" class="input">
+    <div class="hiddenText"></div>
+    <div class="displayNums"></div>
+</body>
+<script>
+    const input = document.querySelector('.input')
+    const hidden = document.querySelector('.hiddenText')
+    const shown = document.querySelector('.displayNums')
+    const hiddenNums = []
+
+    const getStr = (num, result = "", i = 0) => {
+        if(i === num) return result
+        result += "X"
+        return getStr(num, result, i + 1)
+    }
+
+    const displayAllKeys = () => {
+
+    }
+
+    input.addEventListener('keyup', (e) => { 
+        hidden.innerHTML = getStr(input.value.length)
+        if(e.key === "Enter"){
+            const displayObj = {}
+            displayObj["text"] = input.value
+            displayObj["number"] = Math.random()
+            hiddenNums.unshift(displayObj)
+            const messages = hiddenNums.ma
+            renderText(hiddenNums)
+        }
+    })
+
+</script>
+
+
+
+
+<!--TypeWriter Exercise-->
+<!-- <body>
+    <input type="text" name="" id="" class="input">
+    <div class="container"></div>
+    <div class="printed"></div>
+
+</body>
+<script>
+    const input = document.querySelector('.input')
+    const box = document.querySelector('.container')
+    const printed = document.querySelector('.printed')
+    const arr = []
+    input.addEventListener('keyup', (e) => {
+        box.innerHTML = input.value
+        if(e.keyCode === 13){
+            arr.unshift(input.value)
+            printed.innerHTML = arr.reduce((acc, e) => {
+                return `${acc}<h1>${e}</h1>`
+            }, "")
+            input.value = ""
+            box.innerHTML = ""
+        }
+    })
+</script> -->
+
+<!--Exercise 2-->
+<!-- <body>
+    <h1 class="hover">HELLO WORLD</h1>
+</body>
+<script>
+    const hello = document.querySelector('.hover')
+    hello.addEventListener('mousemove', (e) => {
+        hello.innerText = `x: ${e.clientX} y: ${e.clientY}`
+    })
+
+    hello.addEventListener('mouseleave', () => {
+        hello.innerText = 'HELLO WORLD'
+    })
+
+</script> -->
+
+
+<!--Exercise 1-->
+<!-- <body>
+    <div class="testing" style="height: 500px; width: 500px; background: red;"></div>
+</body>
+<script>
+    const name = document.querySelector('.testing')
+    name.addEventListener('click', (e) => {
+        name.innerHTML = `<p>This is client ${e.clientX} ${e.clientY}</p>
+        <p>This is screen ${e.screenX} ${e.screenY}</p>
+        <p>This is page ${e.pageX} ${e.pageY}</p>`
+
+    })
+</script> -->
+
+<!--Key UP-->
+<!-- <body>
+    <input type="text" name="" id="" class="bigInput">
+</body>
+<script>
+    const input = document.querySelector('.bigInput')
+    input.addEventListener('keyup', (e) => {
+        console.log(e)
+    })
+</script> -->
+
+
+<!--Mouse Enter-->
+<!-- <body>
+    <h1 class="mainTitle">Hello World</h1>
+</body>
+<script>
+    const title = document.querySelector('.mainTitle')
+    title.addEventListener('mouseenter', (e) => {
+        console.log(e)
+    })
+</script> -->
+</html>

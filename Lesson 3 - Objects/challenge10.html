@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POKEMON VIEWER</title>
+</head>
+<body>
+    <button class="prev">Previous</button>
+    <button class="next">Next</button>
+    <div class="poke-pics"></div>
+</body>
+<script>
+    const prev = document.querySelector('.prev')
+    const next = document.querySelector('.next')
+    const container = document.querySelector('.poke-pics')
+    //check if prev is null
+    let previousUrl = null
+    let nextUrl = null
+    prev.addEventListener('click', ()=> {
+        if(previousUrl !== null) {
+            gatherPokemon(previousUrl)
+        }
+    })
+    next.addEventListener('click', () => {
+        if(nextUrl !== null){ 
+            gatherPokemon(nextUrl)
+        }
+    })
+
+    const gatherPokemon = (oGUrl = "https://pokeapi.co/api/v2/pokemon/") => {
+        fetch(oGUrl).then(res =>{
+            return res.json()
+        }).then(data => {
+            previousUrl = data.previous
+            console.log(previousUrl)
+            nextUrl = data.next
+            console.log(nextUrl)
+            const arrayPromise = data.results.map(pokemon => {
+                return fetch(pokemon.url).then(pokeRes => {
+                        return pokeRes.json()
+                     })
+                 })
+            return Promise.all(arrayPromise)
+        }).then(allProm => {
+            container.innerHTML = allProm.reduce((acc,e)=> {
+                return `${acc}<div><p>${e.name}</p><img src="${e.sprites.front_default}" /></div>`
+            }, "")
+        })
+    }
+    
+    gatherPokemon()
+</script>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!--querySelectorAll Example-->
+<body>
+    <div>
+        <button class="hello">Hello</button>
+        <button class="hello">Hola</button>
+        <button class="hello">Bună ziua</button>
+        <button class="hello">Aloha</button>
+        <h1 class="hello">Hi World!</h1>
+      </div>
+      <script>
+        const hellos = document.querySelectorAll('.hello')
+        // hellos is an array of length 5:
+        // [buttonElement, buttonElement, buttonElement, buttonElement, h1Element]
+      
+        const buttons = document.querySelectorAll('button')
+        // buttons is an array of length 4:
+        // [buttonElement, buttonElement, buttonElement, buttonElement]
+      
+        // To bind an onclick to each button element, simply use forEach
+        buttons.forEach((button, i) => {
+          button.onclick = () => {
+            alert(`This is the button at index ${i}`)
+          }
+        })
+      </script>
+</body>
+
+
+
+<!--Local Storage Example-->
+<!-- <body>
+    <input type="text" class="textBox" />
+    <button class="submit">Store it</button>
+</body>
+
+<script>
+    const submitButton = document.querySelector(".submit")
+    const textBox = document.querySelector(".textBox")
+
+    const lsData = localStorage.getItem('mydata') || '[]'
+
+    const dataArray = JSON.parse(lsData)
+
+    submitButton.onclick = () => {
+        dataArray.push(textBox.value)
+        localStorage.setItem('mydata', JSON.stringify(dataArray))
+        console.log(dataArray)
+    }
+</script> -->
+
+
+
+
+
+<!--Second Example-->
+<!-- <body>
+    <select class="selectContainer"></select>
+</body>
+<script>
+    const data = ['Charmander', 'Squirtle', 'Caterpie']
+    const select = document.querySelector('.selectContainer')
+    select.innerHTML = data.reduce((acc, e) => {
+      return (
+        acc +
+        `
+      <option>${e}</option>
+    `
+      )
+    }, '')
+  </script> -->
+
+<!--First Example-->
+<!-- <body>
+    <button class="submit1">Click Me</button>
+    <div class="blue-container" style="background-color: blue; height: 100px">
+        <p>hi</p>
+    </div>
+
+</body>
+<script>
+    const button1 = document.querySelector('.submit1')
+    const con = document.querySelector('.blue-container')
+    con.addEventListener('mousemove', (e)=> {
+        con.style.backgroundColor = "red"
+    })
+    button1.addEventListener('click', () => {
+        alert("OUch!")
+    })
+</script> -->
+
+</html>

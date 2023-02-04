@@ -1,0 +1,191 @@
+
+
+<!--Exercise 3-->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 3</title>
+</head>
+<body>
+    <button class="previous">Previous</button>
+    <button class="next">Next</button>
+    <hr>
+    <div class="display"></div>
+    <hr>
+    <textarea name="" id="" cols="20" rows="2" class="insert"></textarea>
+    <button class="submit">Submit</button>
+    <div class="story-display"></div>
+</body>
+<script>
+    const prevBtn = document.querySelector('.previous')
+    const nextBtn = document.querySelector('.next')
+    const submitBtn = document.querySelector('.submit')
+    const txt = document.querySelector('.insert')
+    const display = document.querySelector('.display')
+    const storyDisplay = document.querySelector('.story-display')
+    const lsData = localStorage.getItem('stories') || '[]'
+    const story = JSON.parse(lsData)
+    let count = 0
+
+    //uses prev and next buttons 
+    const changeDisplay = (arr) => {
+        const max_amount = arr.length
+        if(max_amount === 0){
+            display.innerHTML = undefined
+        }
+        if (count => 0 && count < max_amount){
+            prevBtn.onclick = () => {
+                if(count !== 0){
+                    count -= 1
+                }
+                display.innerHTML = `${story[count]}`
+            }
+            nextBtn.onclick = () => {
+                if(count !== max_amount - 1){
+                    count += 1
+                }
+                display.innerHTML = `${story[count]}`
+            }
+        }
+    }
+
+    //updates the words at the bottom
+    const AddStories = () => {
+        localStorage.setItem('stories', JSON.stringify(story))
+        storyDisplay.innerHTML = story.reduce((acc, e) => {
+            return acc + `<h2 class ="story-item">${e}</h2>`
+        }, "")
+        const allStory = document.querySelectorAll('.story-item')
+        allStory.forEach((e, i) => {
+            e.onclick = () => {
+                story.splice(i, 1)
+                AddStories()
+            }
+        })
+        changeDisplay(allStory)
+    }
+
+    submitBtn.onclick = () => {
+        newValue = txt.value
+        if(newValue.length < 3){
+            alert('input too short')
+        } else {
+            story.push(newValue)
+            txt.value = ""
+            AddStories()
+        }
+    }
+    display.innerHTML = "Display Your story here!"
+    AddStories()
+</script>
+</html> -->
+
+
+<!--Exercise 2-->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 2</title>
+</head>
+<body>
+    <h1>TODO LIST</h1>
+    <input type="text" name="" id="" class="filter">
+    <button class="filterBtn">Filter</button>
+    <input type="text" name="" id="" class="user-input">
+    <button class="add">Add</button>
+    <div class="todoList">
+
+    </div>
+</body>
+<script>
+    const list = document.querySelector('.todoList')
+    const inputElement = document.querySelector('.user-input')
+    const buttonElement = document.querySelector('.add')
+    const filterElement = document.querySelector('.filter')
+    const filterBtn = document.querySelector('.filterBtn')
+    const lsData = localStorage.getItem('mydata') || '[]'
+    const todos = JSON.parse(lsData)
+    const render = (arr = todos) => {
+        localStorage.setItem('mydata', JSON.stringify(todos))
+        list.innerHTML = arr.reduce((acc, e) => {
+            return acc + `<h2 class="todo">${e}</h2>`
+        }, "")
+    const todoElements = document.querySelectorAll(".todo")
+    todoElements.forEach((e, i) => {
+        e.onclick = () => {
+            todos.splice(i, 1)
+            render()
+        }
+    })}
+    buttonElement.onclick = () => {
+        const newValue = inputElement.value
+        todos.unshift(newValue)
+        render()
+    }
+    filterBtn.onclick = () => {
+        const result = todos.filter(e => {
+            return e.includes(filterElement.value)
+        })
+        render(result)
+    }
+    render()
+
+    //close but doesn't remove from the to do list items so they reappear
+    // const addBtn = document.querySelector('.add')
+    // const userInput = document.querySelector('.user-input')
+    // const todolist = document.querySelector('.todolist')
+    // const todoItems = []
+    // addBtn.addEventListener('click', () => {
+    //     todoItems.unshift(`<h2 class="todo-item">${userInput.value}</h2>`)
+    //     todolist.innerHTML = todoItems.reduce((acc, x) => {
+    //         return acc + x
+    //     })
+    //     const todoItems2 = document.querySelectorAll('.todo-item')
+    //     todoItems2.forEach(e => {
+    //         e.addEventListener('click', ()=> {
+    //             e.parentNode.removeChild(e)
+    //         })
+    //     })
+
+    // })
+</script>
+</html> -->
+
+
+<!--Exercise 1-->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises</title>
+</head>
+<body>
+    <h1>Add Option</h1>
+    <input type="text" class="inputTxt">
+    <button class="add">Add</button><br>
+    <select class="selectTing"></select>
+</body>
+<script>
+    const inputTxt = document.querySelector('.inputTxt')
+    const addBtn = document.querySelector('.add')
+    const selectEl = document.querySelector('.selectTing')
+    const opsArr = []
+
+    addBtn.addEventListener('click', () => {
+        opsArr.unshift(inputTxt.value)
+        selectEl.innerHTML = opsArr.reduce((acc, e) => {
+            return acc + `<option>${e}</options>`
+        }, "")
+    })
+</script>
+</html> -->

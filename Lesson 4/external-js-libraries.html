@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External Libraries</title>
+</head>
+<body>
+    
+</body>
+<script src="./lib.js"></script>
+<script>
+    console.log(app)
+    app.alert()
+</script>
+
+<!--Second exercise-->
+<!-- <body>
+    <textarea name="" class="text" cols="30" rows="10"></textarea>
+    <select name="" class="select"></select>
+</body>
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=auJywySb"></script>
+<script>
+    const input = document.querySelector('.text')
+    const selectEle = document.querySelector('.select')
+    const arr = responsiveVoice.getVoices()
+    selectEle.innerHTML = arr.reduce((acc, e) => {
+        return `${acc}<option value="${e.name}">${e.name}</option>`
+    })
+    selectEle.addEventListener('change', (e) => {
+        responsiveVoice.speak(`${input.value}`, `${selectEle.value}`);
+    })
+</script> -->
+
+
+<!-- <body>
+    <textarea cols="30" rows="10" class="input"></textarea>
+    <div class="display"></div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+    const text = document.querySelector('.input')
+    const display = document.querySelector('.display')
+    text.focus()
+    text.addEventListener('keyup', (e) => {
+        if(e.key === "Enter"){
+            display.innerHTML = marked.parse(text.value)
+        }
+    })
+</script> -->
+</html>

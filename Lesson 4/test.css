@@ -1,0 +1,43 @@
+/*Selecting By*/
+h1 {
+    color: rgba(255, 0, 0, 1)
+}
+
+[type="text"] {
+    color: rgba(255,0,0,1)
+}
+
+.title2 {
+    color:rgba(255, 0, 0, 1)
+}
+
+div > h1 {
+    color: rgb(12, 147, 102)
+}
+
+/*Combining Selectrs */
+h1.title2 {
+    font-size: 5rem;
+}
+
+h1, 
+.title2 {
+    background-color: aliceblue;
+}
+
+/*Selection States - pseudo-classes*/
+h1:hover {
+    color: rgba(0,255,0,1)
+}
+
+/*Selection Specificity
+-The more specific selector is used
+    ID selectors (examples: #nice, #green, #container)
+    Class selectors, attribute selectors, and pseudo-classes (examples: .nice, [type="div"], :hover)
+    Type selectors and pseudo-elements (examples: div, h1,::before)
+    
+    The 3 levels of specificity overrides ranked from most to least powerful:
+    !important
+    Inline styles
+    Ordering (last attribute read)
+    */

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Elements</title>
+</head>
+<body>
+    <input type="text" class="file">
+    <h1 class="display">Input an mp3 URL and hit Enter</h1>
+    <audio src="" class="audio"></audio>
+</body>
+<script>
+    const audioElement = document.querySelector('.audio')
+    const displayElement = document.querySelector('.display')
+    const urlInput = document.querySelector('.file')
+    urlInput.focus()
+    audioElement.addEventListener('timeupdate', (e) => {
+        let seconds = Math.floor(audioElement.currentTime)
+        const min = Math.floor(seconds / 60)
+        seconds = seconds % 60
+        seconds = `${seconds}`
+        if (seconds.length < 2) {
+            seconds = `0${seconds}`
+        }
+        displayElement.innerText = `${min}:${seconds}`
+    })
+    let isStarted = false
+    urlInput.addEventListener('keyup', e => {
+        if(e.key === "Enter"){
+            audioElement.src = urlInput.value
+            audioElement.play()
+            displayElement.innerText = '00:00'
+            isStarted = true
+        }
+    })
+    displayElement.addEventListener('mouseenter', () => {
+        if(!isStarted){
+            return
+        }
+        audioElement.play()
+    })
+    displayElement.addEventListener('mouseleave', () => {
+        if(!isStarted){
+            return
+        }
+        audioElement.pause()
+    })
+</script>
+
+<!--Meme generator-->
+<!-- <body>
+    <input type="text" class="userInput">
+    <video class="video"></video>
+    <canvas class="canvas"></canvas>
+</body>
+<script>
+    const canvas = document.querySelector('.canvas')
+    const context = canvas.getContext('2d')
+    const videoEle = document.querySelector('.video')
+    const input = document.querySelector('.userInput')
+
+    const takePicture = () => {
+        canvas.width = videoEle.videoWidth
+        canvas.height = videoEle.videoHeight
+        context.drawImage(videoEle, 0, 0)
+        context.font = "50px Comic Sans MS"
+        context.fillStyle = "red"
+        context.fillText(input.value, 10, 450)
+    }
+
+    navigator.mediaDevices.getUserMedia({
+        video: true
+    }).then((stream) => {
+        videoEle.srcObject = stream
+        videoEle.play()
+    })
+    input.addEventListener('keyup', (e) => {
+        if(e.key === "Enter"){
+            takePicture()
+        }
+    })
+</script> -->
+
+
+<!--Better hover video-->
+<!-- <body>
+    <div class="display">
+        <button class="start">Start</button>
+    </div>
+</body>
+<script>
+    const display = document.querySelector('.display')
+    const startBtn = document.querySelector('.start')
+
+    const getMinutesAndSeconds = (videoElement) => {
+        let seconds = Math.floor(videoElement.currentTime)
+        const minutes = Math.floor(seconds / 60)
+        seconds = seconds % 60
+        seconds = `${seconds}`
+        if(seconds.length <  2){
+            seconds = `0${seconds}`
+        }
+        return `${minutes}:${seconds}`
+    }
+
+    const startApp = () => {
+        display.innerHTML = `<h1 class="time">0:00</h1><video src="https://songz.c0d3.com/js4/examples/ankurBunny.mp4" class="video"></video>`
+        const video = document.querySelector('.video')
+        const time = document.querySelector('.time')
+        video.addEventListener('timeupdate', (e) => {
+            time.innerHTML = getMinutesAndSeconds(video)
+        })
+        video.addEventListener('mouseenter', () => {
+            video.play()
+        })
+        video.addEventListener('mouseleave', () => {
+            video.pause()
+        })
+    }
+
+    startBtn.addEventListener('click', () => {
+        startApp()
+    })
+</script> -->
+
+
+<!--Hover To Play Video-->
+<!--My way works but need to imrove on seperating my code into functions to help keep it seperated.-->
+<!-- <body>
+    <button class="start">Start</button>
+</body>
+<script>
+    const startBtn = document.querySelector('.start')
+    startBtn.addEventListener('click', () => {
+        document.body.innerHTML = '<h1 class="time">0:00</h1><video src="https://songz.c0d3.com/js4/examples/ankurBunny.mp4" class="video"></video>'
+        const time = document.querySelector('.time')
+        const video = document.querySelector('.video')
+        //video could be a function and call the certain video element
+        //gonna retry just to make sure i can and to make better habits
+        video.addEventListener('timeupdate', () => {
+            let seconds = Math.floor(video.currentTime)
+            const minutes = Math.floor(seconds / 60)
+            seconds = seconds % 60
+            seconds = `${seconds}`
+            if (seconds.length < 2){
+                seconds = `0${seconds}`
+            }
+            time.innerText = `${minutes}:${seconds}`
+        })
+        video.addEventListener('mouseenter', () => {
+            video.play()
+        })
+        video.addEventListener('mouseleave', () => {
+            video.pause()
+        })
+    })
+</script> -->
+
+
+<!--My attempt at clock one-->
+<!-- <body>
+    <input type="text" name="" id="" class="audio-input">
+    <h1 class="text">Input an MP3 URL and hit Enter</h1>
+    <audio class="audio"></audio>
+</body>
+<script>
+    const audioInput = document.querySelector('.audio-input')
+    const text = document.querySelector('.text')
+    const audio = document.querySelector('.audio')
+    let count = 0
+
+    const startMusic = () => {
+        audio.play()
+    }
+
+    const stopMusic = () => {
+        audio.pause()
+    }
+
+    const displayTime = () => {
+        text.innerText = `${count}:${Math.ceil(audio.currentTime)% 60}`
+        if(Math.ceil(audio.currentTime) % 60 === 0){
+            count += 1
+        }
+
+        setTimeout(() => {
+            displayTime()
+        }, 1000)
+    }
+
+    audioInput.addEventListener('keyup', (e) => {
+        if(e.key == "Enter"){
+            audio.src = audioInput.value
+            startMusic()
+            displayTime()
+            text.addEventListener('mouseenter', () => {
+                startMusic()
+                displayTime()
+            })
+            text.addEventListener('mouseleave', () => {
+                stopMusic()
+            })
+        }
+    })
+</script> -->
+
+
+<!--Audo hover Player-->
+<!--Basically the same but they have a toggle to check if it's not running and we try to pause it-->
+<!-- <body>
+    <input type="text" name="" id="" class="audio-input">
+    <h1 class="text">Input an MP3 URL and hit Enter</h1>
+    <audio class="audio"></audio>
+</body>
+<script>
+    const audioInput = document.querySelector('.audio-input')
+    const text = document.querySelector('.text')
+    const audio = document.querySelector('.audio')
+
+    const startMusic = () => {
+        text.innerText = "Playing..."
+        audio.play()
+    }
+
+    const stopMusic = () => {
+        text.innerText = "Paused..."
+        audio.pause()
+    }
+
+    audioInput.addEventListener('keyup', (e) => {
+        if(e.key == "Enter"){
+            audio.src = audioInput.value
+            startMusic()
+            text.addEventListener('mouseenter', () => {
+                startMusic()
+            })
+            text.addEventListener('mouseleave', () => {
+                stopMusic()
+            })
+        }
+    })
+</script> -->
+
+
+<!--Canvas example-->
+<!-- <body>
+    <video class="video"></video>
+    <canvas class="canvas"></canvas>
+</body>
+<script>
+    const canvas = document.querySelector('.canvas')
+    const context = canvas.getContext('2d')
+    const videoElement = document.querySelector('.video')
+
+    const delayPicture = () => {
+        setTimeout(() => {
+            canvas.width = videoElement.videoWidth
+            canvas.height = videoElement.videoHeight
+            context.drawImage(videoElement, 0, 0)
+            delayPicture()
+        }, 5000)
+    }
+
+    navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true
+    }).then((stream) => {
+        videoElement.srcObject = stream
+        videoElement.play()
+        delayPicture()
+    })
+</script> -->
+
+
+<!--Get Webcam-->
+<!-- <body>
+    <video class="video"></video>
+</body>
+<script>
+    navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true
+    }).then((stream) => {
+        videoElement.srcObject = stream
+        videoElement.play()
+    })
+    const videoElement = document.querySelector('.video')
+</script> -->
+</html>

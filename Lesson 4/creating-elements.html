@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating elements</title>
+</head>
+<body>
+    <button class="addNew">Add Person</button>
+    <div class="container"></div>
+    <hr>
+    <h3>Registered</h3>
+    <div class="rContainer"></div>
+</body>
+<script>
+    const addBtn = document.querySelector('.addNew')
+    const container = document.querySelector('.container')
+    const rContainer = document.querySelector('.rContainer')
+    const guestList = []
+    const addToList = (newGuest) => {
+        guestList.push(newGuest)
+        rContainer.innerText = guestList.reduce((acc, e, i) => {
+            let prefix = ", "
+            if(i === 0){
+                prefix = ""
+            }
+            return acc + `${prefix}${e}`
+        }, "")
+    }
+    addBtn.addEventListener('click', () => {
+        const element = document.createElement('div')
+        element.innerHTML = ` First Name: <input type="text" class="fname"> Last Name: <input type="text" class="lname"> <button class = "register">Register</button>`
+        const fname = element.querySelector('.fname')
+        const lname = element.querySelector('.lname')
+        const registerButton = element.querySelector('.register')
+        registerButton.addEventListener('click', () => {
+            addToList(`${fname.value} ${lname.value}`)
+            element.remove()
+        })
+        container.append(element)
+    })
+</script>
+
+
+<!--My Register attempt-->
+<!--doing how they did it next-->
+<!-- <body>
+    <button class="add">Add Person</button>
+    <div class="pop-up"></div>
+    <hr>
+    <h3>Registered</h3>
+    <div class="container">
+    </div>
+</body>
+<script>
+    const addBtn = document.querySelector('.add')
+    const popUp = document.querySelector('.pop-up')
+    const container = document.querySelector('.container')
+    addBtn.addEventListener('click', () => {
+        const conDiv = document.createElement('div')
+        const firstNameLabel = document.createElement('label')
+        firstNameLabel.innerText = 'First Name: '
+        const firstName = document.createElement('input')
+        firstName.classList = "first-name"
+        const lastNameLabel = document.createElement('label')
+        lastNameLabel.innerText = ' Last Name: '
+        const lastName = document.createElement('input')
+        lastName.classList = "last-name"
+        const registerButton = document.createElement('button')
+        registerButton.innerText = "Register"
+        registerButton.classList = 'regBtn'
+        conDiv.append(firstNameLabel)
+        conDiv.append(firstName)
+        conDiv.append(lastNameLabel)
+        conDiv.append(lastName)
+        conDiv.append(registerButton)
+        popUp.append(conDiv)
+        registerButton.addEventListener('click', () => {
+            container.innerText = container.innerText + ` ${firstName.value} ${lastName.value}, `
+            popUp.innerHTML = ""
+        })
+    })
+</script> -->
+
+
+<!--Counter Clicker-->
+<!-- <body>
+    <button class="add">Add Counter</button>
+    <div class="display"></div>
+</body>
+<script>
+    const addBtn = document.querySelector('.add')
+    const display = document.querySelector('.display')
+    addBtn.addEventListener('click', () => {
+        const clicker = document.createElement('h1')
+        clicker.innerText = "0 clicks"
+        let count = 0
+        clicker.addEventListener('click', (e) => {
+            count += 1
+            clicker.innerText = `${count} clicks`
+        })
+        display.append(clicker)
+    })
+</script> -->
+
+<!--Click Recorder-->
+<!-- <body>
+    <div class="display"></div>
+</body>
+<script>
+    const display = document.querySelector('.display')
+    document.addEventListener('click', (e) => {
+        const location = document.createElement('h1')
+        location.innerText = `X: ${e.clientX}, Y: ${e.clientY}`
+        display.prepend(location)
+    })
+</script> -->
+</html>
