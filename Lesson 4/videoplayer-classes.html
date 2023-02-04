@@ -53,16 +53,29 @@
     const startTime = document.querySelector('.startTime')
     const endTime = document.querySelector('.endTime')
 
+    const display = document.querySelector('.captionList')
     const render = () => {
+        const defaults = document.querySelectorAll('.caption')
+        defaults.forEach((e) => {
+            console.log(e)
+        })
         const newCap = new Caption(captionInput.value, startTime.value, endTime.value)
-        console.log(newCap.start)
+        captions.push(newCap)
+        display.innerHTML = captions.reduce((acc, e) => {
+            return acc + `<div class="caption"><h5>${e.captionText}</h5><p class="control startAt">${e.start}</p><p class="control endAt">${e.end}</p></div>`
+        }, "")
+        
     }
 
     function Caption (captionText, start, end) {
         this.start = start
+        this.end = end
+        this.captionText = captionText
     }
 
-    saveBtn.addEventListener('click', render)
+    saveBtn.addEventListener('click', () => {
+        render()
+    })
 </script>
 <style>
     .videoContainer {
