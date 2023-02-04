@@ -19,26 +19,6 @@
         <button class="save">Save</button>
         <hr>
         <div class="captionList">
-            <div class="caption">
-                <h5>A beautiful Typewriter</h5>
-                <p class="control startAt">0</p>
-                <p class="control endAt">3000</p>
-            </div>
-            <div class="caption">
-                <h5>On to a big piece of paper</h5>
-                <p class="control startAt">3000</p>
-                <p class="control endAt">7000</p>
-            </div>
-            <div class="caption">
-                <h5>Transitioning to Video!</h5>
-                <p class="control startAt">7000</p>
-                <p class="control endAt">8000</p>
-            </div>
-            <div class="caption">
-                <h5>Video of horse, then magazine</h5>
-                <p class="control startAt">8000</p>
-                <p class="control endAt">13000</p>
-            </div>
         </div>
     </div>
     
@@ -47,7 +27,8 @@
 <script>
 //Need to use classes instead of what was used before.
     const saveBtn = document.querySelector('.save')
-    const captions = []
+    const captions = [new Caption("A beautiful Typewriter", 0 , 3000), new Caption("On to a big piece of paper", 3000, 7000), 
+    new Caption("Transitioning to Video!", 7000, 8000), new Caption("Video of horse, then magazine", 8000, 13000)]
 
     const captionInput = document.querySelector('.captionInput')
     const startTime = document.querySelector('.startTime')
@@ -55,16 +36,26 @@
 
     const display = document.querySelector('.captionList')
     const render = () => {
-        const defaults = document.querySelectorAll('.caption')
-        defaults.forEach((e) => {
-            console.log(e)
-        })
-        const newCap = new Caption(captionInput.value, startTime.value, endTime.value)
-        captions.push(newCap)
-        display.innerHTML = captions.reduce((acc, e) => {
-            return acc + `<div class="caption"><h5>${e.captionText}</h5><p class="control startAt">${e.start}</p><p class="control endAt">${e.end}</p></div>`
-        }, "")
-        
+
+        if(Number.isInteger(+startTime.value) && Number.isInteger(+endTime.value)){
+            const newCap = new Caption(captionInput.value, startTime.value, endTime.value)
+            captions.push(newCap)
+            display.innerHTML = captions.reduce((acc, e) => {
+                return acc + `<div class="caption"><h5>${e.captionText}</h5><p class="control startAt">${e.start}</p><p class="control endAt">${e.end}</p></div>`
+            }, "")
+            const addConfirm = document.querySelectorAll('.caption')
+            addConfirm.forEach((e,i) => {
+                e.addEventListener('click', () => {
+                    if(confirm(`Do you wish to delete caption: ${e.captionInput}`)){
+                        e.remove()
+                        captions.splice(i, 1)
+                    }
+                })
+            })
+        }
+        captionInput.value = ""
+        startTime.value = ""
+        endTime.value = ""
     }
 
     function Caption (captionText, start, end) {
@@ -76,6 +67,7 @@
     saveBtn.addEventListener('click', () => {
         render()
     })
+
 </script>
 <style>
     .videoContainer {
