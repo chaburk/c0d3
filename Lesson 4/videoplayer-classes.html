@@ -36,10 +36,6 @@
 
     const display = document.querySelector('.captionList')
     const render = () => {
-
-        if(Number.isInteger(+startTime.value) && Number.isInteger(+endTime.value)){
-            const newCap = new Caption(captionInput.value, startTime.value, endTime.value)
-            captions.push(newCap)
             display.innerHTML = captions.reduce((acc, e) => {
                 return acc + `<div class="caption"><h5>${e.captionText}</h5><p class="control startAt">${e.start}</p><p class="control endAt">${e.end}</p></div>`
             }, "")
@@ -52,10 +48,14 @@
                     }
                 })
             })
-        }
-        captionInput.value = ""
-        startTime.value = ""
-        endTime.value = ""
+            if(Number.isInteger(+startTime.value) && Number.isInteger(+endTime.value)){
+                const newCap = new Caption(captionInput.value, startTime.value, endTime.value)
+                captions.push(newCap)
+                captionInput.value = ""
+                startTime.value = ""
+                endTime.value = ""
+                render()
+            }
     }
 
     function Caption (captionText, start, end) {
@@ -67,6 +67,7 @@
     saveBtn.addEventListener('click', () => {
         render()
     })
+    render()
 
 </script>
 <style>
